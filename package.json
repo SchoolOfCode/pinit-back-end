@@ -7,7 +7,9 @@
     "start": "node ./bin/www.js",
     "db:deploy": "node ./db/scripts/users/createTable.js && node ./db/scripts/users/populateTable.js",
     "db:createusers": "node -r dotenv/config ./db/scripts/users/createTable.js",
+    "db:createmedia": "node -r dotenv/config ./db/scripts/media/createMediaTable.js",
     "db:populateusers": "node -r dotenv/config ./db/scripts/users/populateTable.js",
+    "db:populatemedia": "node -r dotenv/config ./db/scripts/media/populateMedia.js",
     "dev": "nodemon -r dotenv/config ./bin/www.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },

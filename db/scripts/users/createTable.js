@@ -6,12 +6,4 @@ const response = await db.query(
 
 console.log(response);
 
-// db.end();
-
-const mediaResponse = await db.query(
-  `CREATE TABLE IF NOT EXISTS media (id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES user(id), aws_key TEXT, media_title TEXT, media_desc TEXT, date INT, location TEXT);`
-);
-
-console.log(mediaResponse);
-
 db.end();
