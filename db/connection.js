@@ -1,9 +1,13 @@
 import pg from "pg";
 
-import { connectionString } from "../config.js";
+import db from "../config.js";
 
 const pool = new pg.Pool({
-  connectionString,
+  host:db.host,
+  database:db.database,
+  user:db.user,
+  port:db.port,
+  password:db.password,
   ssl: {
     rejectUnauthorized: false
   }
