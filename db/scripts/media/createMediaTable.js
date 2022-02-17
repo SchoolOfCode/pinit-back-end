@@ -7,3 +7,7 @@ const mediaResponse = await db.query(
 console.log(mediaResponse);
 
 db.end();
+
+
+
+// user_id INTEGER REFERENCES users(id),
