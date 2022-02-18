@@ -57,8 +57,29 @@ export function addMedia(item) {
    return dummyData[dummyData.length - 1];
 }
 
-addMedia({
-   id: 22,
+// addMedia({
+//    id: 22,
+//    userId: 11,
+//    aws_key:
+//       "https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg",
+//    media_title: "Second stop in Italy",
+//    location: "XXX",
+//    date: "23/09/17",
+//    media_descr: "Nice",
+// });
+
+//Editing a media item
+export function editMediaByID(id, updates) {
+   const foundIndex = dummyData.findIndex((item) => {
+      return item.id === id;
+   });
+   dummyData[foundIndex] = updates;
+   console.log(dummyData);
+   return dummyData[index];
+}
+
+editMediaByID(1, {
+   id: 1,
    userId: 11,
    aws_key:
       "https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg",
@@ -67,15 +88,6 @@ addMedia({
    date: "23/09/17",
    media_descr: "Nice",
 });
-
-//Editing a media item
-export function editMediaByID(id, updates) {
-   const foundIndex = dummyData.findIndex((item) => {
-      return item.id === id;
-   });
-   dummyData[index] = updates;
-   return dummyData[index];
-}
 
 //Deleting a media item by id
 export function deleteMediaById(id) {
