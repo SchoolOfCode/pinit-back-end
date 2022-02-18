@@ -58,7 +58,7 @@ router.get("/media/:id", async function (req, res) {
 });
 
 // GET media by location
-router.get("/media/:location", async function (req, res) {
+router.get("/media/location/:location", async function (req, res) {
    //can't call the function until created/imported
    const data = await getMediaByLocation(req.params.location); // TODO: check if :location is correct param
    if (data) {
@@ -75,9 +75,9 @@ router.get("/media/:location", async function (req, res) {
 });
 
 // GET media by date
-router.get("/media/:date", async function (req, res) {
+router.get("/media/date/:date", async function (req, res) {
    //can't call the function until created/imported
-   const data = await getMediaByLocation(req.params.location); // TODO: check if :date is correct param
+   const data = await getMediaByDate(req.params.date); // TODO: check if :date is correct param
    if (data) {
       return res.json({
          success: true,
