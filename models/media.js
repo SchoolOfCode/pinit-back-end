@@ -78,16 +78,16 @@ export function editMediaByID(id, updates) {
    return dummyData[index];
 }
 
-editMediaByID(1, {
-   id: 1,
-   userId: 11,
-   aws_key:
-      "https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg",
-   media_title: "Second stop in Italy",
-   location: "XXX",
-   date: "23/09/17",
-   media_descr: "Nice",
-});
+// editMediaByID(1, {
+//    id: 1,
+//    userId: 11,
+//    aws_key:
+//       "https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg",
+//    media_title: "Second stop in Italy",
+//    location: "XXX",
+//    date: "23/09/17",
+//    media_descr: "Nice",
+// });
 
 //Deleting a media item by id
 export function deleteMediaById(id) {
@@ -96,8 +96,11 @@ export function deleteMediaById(id) {
    });
    const itemToDelete = dummyData[foundIndex];
    dummyData.splice(foundIndex, 1);
+   console.log(dummyData);
    return itemToDelete;
 }
+
+deleteMediaById(1);
 
 // export async function getAllMedia() {
 //    const result = await db.query(`SELECT * FROM media;`);
