@@ -23,7 +23,19 @@ export function getMediaById(id) {
    return media;
 }
 
-getMediaById(3);
+// getMediaById(3);
+
+export function getMediaByLocation(location) {
+   const userData = dummyData.filter((item) => {
+      if (item.location === location) {
+         return item;
+      }
+   });
+   console.log(userData);
+   return userData;
+}
+
+getMediaByLocation("Venice");
 
 // export async function getAllMedia() {
 //    const result = await db.query(`SELECT * FROM media;`);
