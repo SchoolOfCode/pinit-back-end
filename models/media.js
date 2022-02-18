@@ -100,7 +100,25 @@ export function deleteMediaById(id) {
    return itemToDelete;
 }
 
-deleteMediaById(1);
+//Deleting a media item by location
+export function deleteMediaByLocation(location) {
+   const foundIndex = dummyData.findIndex((item) => {
+      return item.location === location;
+   });
+   const itemToDelete = dummyData[foundIndex];
+   dummyData.splice(foundIndex, 1);
+   return itemToDelete;
+}
+
+//Deleting a media item by date
+export function deleteMediaByDate(date) {
+   const foundIndex = dummyData.findIndex((item) => {
+      return item.date === date;
+   });
+   const itemToDelete = dummyData[foundIndex];
+   dummyData.splice(foundIndex, 1);
+   return itemToDelete;
+}
 
 // export async function getAllMedia() {
 //    const result = await db.query(`SELECT * FROM media;`);
