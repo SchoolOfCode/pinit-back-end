@@ -1,5 +1,6 @@
 import db from "../db/connection.js";
 import dummyData from "../dummyData/data.js";
+
 //Getting all media items by its user
 export function getAllUserMedia(userId) {
    const userData = dummyData.filter((item) => {

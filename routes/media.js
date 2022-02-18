@@ -9,6 +9,7 @@ import {
    editMediaByID,
    deleteMediaById,
    deleteMediaByLocation,
+   deleteMediaByDate,
 } from "../models/media.js";
 
 const router = express.Router();
