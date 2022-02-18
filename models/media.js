@@ -11,7 +11,19 @@ export function getAllUserMedia(userId) {
    return userData;
 }
 
-getAllUserMedia(11);
+//getAllUserMedia(11);
+
+export function getMediaById(id) {
+   const media = dummyData.find((item) => {
+      if (item.id === id) {
+         return item;
+      }
+   });
+   console.log(media);
+   return media;
+}
+
+getMediaById(3);
 
 // export async function getAllMedia() {
 //    const result = await db.query(`SELECT * FROM media;`);
