@@ -48,15 +48,25 @@ export function getMediaByDate(date) {
    return userData;
 }
 
-getMediaByDate("23/09/17");
+//getMediaByDate("23/09/17");
 
 // Adding new media item to the data array
 export function addMedia(item) {
    dummyData.push(item);
+   console.log(dummyData[dummyData.length - 1]);
    return dummyData[dummyData.length - 1];
 }
 
-addMedia();
+addMedia({
+   id: 22,
+   userId: 11,
+   aws_key:
+      "https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg",
+   media_title: "Second stop in Italy",
+   location: "XXX",
+   date: "23/09/17",
+   media_descr: "Nice",
+});
 
 //Editing a media item
 export function editMediaByID(id, updates) {
