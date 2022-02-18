@@ -24,15 +24,71 @@ const router = express.Router();
 // });
 
 // GET all media
-router.get("/media", async function(req, res) {
-//can't call the function until
-})
+router.get("/media", async function (req, res) {
+   //can't call the function until created/imported
+   const data = await getAllMedia();
+   if (data) {
+      return res.json({
+         success: true,
+         payload: data,
+      });
+   } else {
+      return res.json({
+         success: false,
+         payload: "something went wrong",
+      });
+   }
+});
 
-// GET media by id 
+// GET media by id
+router.get("/media/:id", async function (req, res) {
+   //can't call the function until created/imported
+   const data = await getMediaById(req.params.id);
+   if (data) {
+      return res.json({
+         success: true,
+         payload: data,
+      });
+   } else {
+      return res.json({
+         success: false,
+         payload: "something went wrong",
+      });
+   }
+});
 
 // GET media by location
+router.get("/media/:location", async function (req, res) {
+   //can't call the function until created/imported
+   const data = await getMediaByLocation(req.params.location); // TODO: check if :location is correct param
+   if (data) {
+      return res.json({
+         success: true,
+         payload: data,
+      });
+   } else {
+      return res.json({
+         success: false,
+         payload: "something went wrong",
+      });
+   }
+});
 
 // GET media by date
-
+router.get("/media/:date", async function (req, res) {
+   //can't call the function until created/imported
+   const data = await getMediaByLocation(req.params.location); // TODO: check if :date is correct param
+   if (data) {
+      return res.json({
+         success: true,
+         payload: data,
+      });
+   } else {
+      return res.json({
+         success: false,
+         payload: "something went wrong",
+      });
+   }
+});
 
 export default router;
