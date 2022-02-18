@@ -37,6 +37,18 @@ export function getMediaByLocation(location) {
 
 getMediaByLocation("Venice");
 
+export function getMediaByDate(date) {
+   const userData = dummyData.filter((item) => {
+      if (item.date === date) {
+         return item;
+      }
+   });
+   console.log(userData);
+   return userData;
+}
+
+getMediaByDate("23/09/17");
+
 // export async function getAllMedia() {
 //    const result = await db.query(`SELECT * FROM media;`);
 //    return result.rows;
