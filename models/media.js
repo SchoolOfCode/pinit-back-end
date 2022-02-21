@@ -1,4 +1,4 @@
-import db from "../db/connection.js";
+//import db from "../db/connection.js";
 import dummyData from "../dummyData/data.js";
 
 //Getting all media items by its user
