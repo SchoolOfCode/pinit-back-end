@@ -72,7 +72,7 @@ export async function editMediaByID(id, updates) {
    });
    dummyData[foundIndex] = updates;
    console.log(dummyData);
-   return dummyData[index];
+   return dummyData[foundIndex];
 }
 
 // editMediaByID(1, {
@@ -102,13 +102,12 @@ export async function deleteMediaByLocation(location) {
    const foundIndex = dummyData
       .map((item, index) => {
          if (item.location !== location) {
+            //pass
          } else {
             return index;
          }
       })
       .filter((item) => item);
-
-   console.log("i have found", foundIndex);
 
    const deletedMedia = [];
    for (let i = foundIndex.length - 1; i >= 0; i--) {
@@ -116,28 +115,35 @@ export async function deleteMediaByLocation(location) {
       dummyData.splice(foundIndex[i], 1);
    }
 
-   // const deletedMedia = dummyData.filter((item, index) => {
-   //    if (item.location === location) {
-   //       //deletedMedia.push(item);
-   //       dummyData.splice(index, 1);
-   //    }
-   // });
-
    return deletedMedia;
-
-   // go through array and check all items if location is XXX
-   // save indexes of all items with location of XXX
-   // delete all recorded indexes from array
 }
 
 //Deleting a media item by date
 export async function deleteMediaByDate(date) {
-   const foundIndex = dummyData.findIndex((item) => {
-      return item.date === date;
-   });
-   const itemToDelete = dummyData[foundIndex];
-   dummyData.splice(foundIndex, 1);
-   return itemToDelete;
+   const foundIndex = dummyData
+      .map((item, index) => {
+         if (item.date !== date) {
+            //pass
+         } else {
+            return index;
+         }
+      })
+      .filter((item) => item);
+
+   const deletedMedia = [];
+   for (let i = foundIndex.length - 1; i >= 0; i--) {
+      deletedMedia.push(dummyData[i]);
+      dummyData.splice(foundIndex[i], 1);
+   }
+
+   return deletedMedia;
+
+   // const foundIndex = dummyData.findIndex((item) => {
+   //    return item.date === date;
+   // });
+   // const itemToDelete = dummyData[foundIndex];
+   // dummyData.splice(foundIndex, 1);
+   // return itemToDelete;
 }
 
 // export async function getAllMedia() {

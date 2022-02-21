@@ -181,9 +181,9 @@ router.delete("/media/date/:date", async function (req, res) {
 });
 //PUT media by id
 router.put("/media/:id", async function (req, res) {
-   const id = req.params.id;
+   const id = Number(req.params.id);
    const update = req.body;
-   const result = await editMediaByID(update, id);
+   const result = await editMediaByID(id, update);
    if (!result) {
       res,
          json({
