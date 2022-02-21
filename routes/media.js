@@ -55,7 +55,7 @@ router.get("/media", async function (req, res) {
 // GET media by id
 router.get("/media/:id", async function (req, res) {
    //can't call the function until created/imported
-   const id = req.params.id;
+   const id = Number(req.params.id);
    const data = await getMediaById(id);
    if (data) {
       return res.json({
@@ -75,7 +75,7 @@ router.get("/media/:id", async function (req, res) {
 router.get("/media/location/:location", async function (req, res) {
    //can't call the function until created/imported
    const location = req.params.location;
-   const data = await getMediaByLocation(location); // TODO: check if :location is correct param
+   const data = await getMediaByLocation(location);
    if (data) {
       return res.json({
          success: true,
@@ -94,7 +94,7 @@ router.get("/media/location/:location", async function (req, res) {
 router.get("/media/date/:date", async function (req, res) {
    //can't call the function until created/imported
    const date = req.params.date;
-   const data = await getMediaByDate(date); // TODO: check if :date is correct param
+   const data = await getMediaByDate(date); // FIXME: change date format!!!
    if (data) {
       return res.json({
          success: true,
@@ -112,6 +112,7 @@ router.get("/media/date/:date", async function (req, res) {
 //POST media
 router.post("/media", async function (req, res) {
    const data = req.body;
+   console.log("this is the data", data);
    const result = await addMedia(data);
    if (!result) {
       res.json({
@@ -128,7 +129,7 @@ router.post("/media", async function (req, res) {
 
 //DELETE media by id
 router.delete("/media/:id", async function (req, res) {
-   const id = req.params.id;
+   const id = Number(req.params.id);
    const result = await deleteMediaById(id);
    if (!result) {
       res.json({
@@ -143,6 +144,7 @@ router.delete("/media/:id", async function (req, res) {
       });
    }
 });
+
 //DELETE all media by location
 router.delete("/media/location/:location", async function (req, res) {
    const location = req.params.location;

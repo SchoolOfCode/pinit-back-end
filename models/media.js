@@ -2,19 +2,13 @@
 import dummyData from "../dummyData/data.js";
 
 //Getting all media items by its user
-export function getAllUserMedia(userId) {
-   const userData = dummyData.filter((item) => {
-      if (item.userId === userId) {
-         return item;
-      }
-   });
-   console.log(userData);
-   return userData;
+export async function getAllUserMedia() {
+   return dummyData;
 }
 
 //getAllUserMedia(11);
 //Getting a media item by its ID
-export function getMediaById(id) {
+export async function getMediaById(id) {
    const media = dummyData.find((item) => {
       if (item.id === id) {
          return item;
@@ -26,7 +20,7 @@ export function getMediaById(id) {
 
 // getMediaById(3);
 //Getting a media item by its location
-export function getMediaByLocation(location) {
+export async function getMediaByLocation(location) {
    const userData = dummyData.filter((item) => {
       if (item.location === location) {
          return item;
@@ -39,7 +33,7 @@ export function getMediaByLocation(location) {
 //getMediaByLocation("Venice");
 
 //Getting a media item by its date
-export function getMediaByDate(date) {
+export async function getMediaByDate(date) {
    const userData = dummyData.filter((item) => {
       if (item.date === date) {
          return item;
@@ -52,11 +46,13 @@ export function getMediaByDate(date) {
 //getMediaByDate("23/09/17");
 
 // Adding new media item to the data array
-export function addMedia(item) {
+export async function addMedia(item) {
    dummyData.push(item);
    console.log(dummyData[dummyData.length - 1]);
    return dummyData[dummyData.length - 1];
 }
+
+// id = dummyData.length +1 {id, ...item}
 
 // addMedia({
 //    id: 22,
@@ -70,7 +66,7 @@ export function addMedia(item) {
 // });
 
 //Editing a media item
-export function editMediaByID(id, updates) {
+export async function editMediaByID(id, updates) {
    const foundIndex = dummyData.findIndex((item) => {
       return item.id === id;
    });
@@ -91,7 +87,7 @@ export function editMediaByID(id, updates) {
 // });
 
 //Deleting a media item by id
-export function deleteMediaById(id) {
+export async function deleteMediaById(id) {
    const foundIndex = dummyData.findIndex((item) => {
       return item.id === id;
    });
@@ -102,17 +98,39 @@ export function deleteMediaById(id) {
 }
 
 //Deleting a media item by location
-export function deleteMediaByLocation(location) {
-   const foundIndex = dummyData.findIndex((item) => {
-      return item.location === location;
-   });
-   const itemToDelete = dummyData[foundIndex];
-   dummyData.splice(foundIndex, 1);
-   return itemToDelete;
+export async function deleteMediaByLocation(location) {
+   const foundIndex = dummyData
+      .map((item, index) => {
+         if (item.location !== location) {
+         } else {
+            return index;
+         }
+      })
+      .filter((item) => item);
+
+   console.log("i have found", foundIndex);
+
+   const deletedMedia = [];
+   for (let i = 0; i < foundIndex.length; i++) {
+      dummyData.splice(foundIndex[i], 1);
+   }
+
+   // const deletedMedia = dummyData.filter((item, index) => {
+   //    if (item.location === location) {
+   //       //deletedMedia.push(item);
+   //       dummyData.splice(index, 1);
+   //    }
+   // });
+
+   return deletedMedia;
+
+   // go through array and check all items if location is XXX
+   // save indexes of all items with location of XXX
+   // delete all recorded indexes from array
 }
 
 //Deleting a media item by date
-export function deleteMediaByDate(date) {
+export async function deleteMediaByDate(date) {
    const foundIndex = dummyData.findIndex((item) => {
       return item.date === date;
    });

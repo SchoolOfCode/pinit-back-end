@@ -36,7 +36,7 @@ const dummyData = [
       userId: 11,
       aws_key: "https://media.timeout.com/images/105489544/image.jpg",
       media_title: "Fourth stop in Italy",
-      location: "Florence",
+      location: "Pisa",
       date: "26/09/17",
       media_descr:
          "Next city was Florence, lots of naked statues. Pizza was decent here, Rome still winning.",
