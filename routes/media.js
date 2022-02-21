@@ -14,29 +14,8 @@ import {
 
 const router = express.Router();
 
-// /* GET media listing. */
-// router.get("/media", async function (req, res, next) {
-//   const media = await getAllMedia();
-
-//   res.json({
-//     success: true,
-//     payload: media,
-//   });
-// });
-
-// /* PUT media */
-// router.post("/media", async function (req, res) {
-//   const { aws_key, media_title, media_desc, date, location } = req.body;
-//   const media = await addMedia(aws_key, media_title, media_desc, date, location);
-//   res.json({
-//     success: true,
-//     payload: media,
-//   });
-// });
-
 // GET all media
 router.get("/media", async function (req, res) {
-   //can't call the function until created/imported
    const data = await getAllUserMedia();
    if (data) {
       return res.json({
@@ -54,7 +33,6 @@ router.get("/media", async function (req, res) {
 
 // GET media by id
 router.get("/media/:id", async function (req, res) {
-   //can't call the function until created/imported
    const id = Number(req.params.id);
    const data = await getMediaById(id);
    if (data) {
@@ -73,7 +51,6 @@ router.get("/media/:id", async function (req, res) {
 
 // GET media by location
 router.get("/media/location/:location", async function (req, res) {
-   //can't call the function until created/imported
    const location = req.params.location;
    const data = await getMediaByLocation(location);
    if (data) {
@@ -92,9 +69,8 @@ router.get("/media/location/:location", async function (req, res) {
 
 // GET media by date
 router.get("/media/date/:date", async function (req, res) {
-   //can't call the function until created/imported
    const date = Number(req.params.date);
-   const data = await getMediaByDate(date); // FIXME: change date format!!!
+   const data = await getMediaByDate(date);
    if (data) {
       return res.json({
          success: true,
@@ -200,3 +176,23 @@ router.put("/media/:id", async function (req, res) {
 });
 
 export default router;
+
+// /* GET media listing. */
+// router.get("/media", async function (req, res, next) {
+//   const media = await getAllMedia();
+
+//   res.json({
+//     success: true,
+//     payload: media,
+//   });
+// });
+
+// /* PUT media */
+// router.post("/media", async function (req, res) {
+//   const { aws_key, media_title, media_desc, date, location } = req.body;
+//   const media = await addMedia(aws_key, media_title, media_desc, date, location);
+//   res.json({
+//     success: true,
+//     payload: media,
+//   });
+// });
