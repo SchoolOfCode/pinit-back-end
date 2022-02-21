@@ -10,7 +10,7 @@ import {
    deleteMediaById,
    deleteMediaByLocation,
    deleteMediaByDate,
-} from "../models/media-api.js";
+} from "../models/media-sql.js";
 
 const router = express.Router();
 
