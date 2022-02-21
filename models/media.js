@@ -111,7 +111,8 @@ export async function deleteMediaByLocation(location) {
    console.log("i have found", foundIndex);
 
    const deletedMedia = [];
-   for (let i = 0; i < foundIndex.length; i++) {
+   for (let i = foundIndex.length - 1; i >= 0; i--) {
+      deletedMedia.push(dummyData[i]);
       dummyData.splice(foundIndex[i], 1);
    }
 
