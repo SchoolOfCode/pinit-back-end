@@ -93,7 +93,7 @@ router.get("/media/location/:location", async function (req, res) {
 // GET media by date
 router.get("/media/date/:date", async function (req, res) {
    //can't call the function until created/imported
-   const date = req.params.date;
+   const date = Number(req.params.date);
    const data = await getMediaByDate(date); // FIXME: change date format!!!
    if (data) {
       return res.json({
@@ -164,7 +164,7 @@ router.delete("/media/location/:location", async function (req, res) {
 });
 //DELETE all media by date
 router.delete("/media/date/:date", async function (req, res) {
-   const date = req.params.date;
+   const date = Number(req.params.date);
    const result = await deleteMediaByDate(date);
    if (!result) {
       res.json({
