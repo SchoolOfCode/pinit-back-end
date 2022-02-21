@@ -6,7 +6,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import logger from "morgan";
 
-import usersRouter from "./routes/users.js";
+//import usersRouter from "./routes/users.js";
+import mediaRouter from "./routes/media.js";
 
 const app = express();
 
@@ -17,17 +18,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", usersRouter);
+app.use("/", mediaRouter);
 
 app.use(function (req, res, next) {
-  res
-    .status(404)
-    .json({ message: "We couldn't find what you were looking for 😞" });
+   res.status(404).json({
+      message: "We couldn't find what you were looking for 😞",
+   });
 });
 
 app.use(function (err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).json(err);
+   console.error(err.stack);
+   res.status(500).json(err);
 });
 
 export default app;
