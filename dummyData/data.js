@@ -44,7 +44,8 @@ const dummyData = [
    {
       id: 5,
       userId: 11,
-      image: "https://www.fodors.com/wp-content/uploads/2019/11/HERO_Venice__FloatingCityBuilt_iStock-986940360.jpg",
+      aws_key:
+         "https://www.fodors.com/wp-content/uploads/2019/11/HERO_Venice__FloatingCityBuilt_iStock-986940360.jpg",
       media_title: "Fifth stop in Italy",
       location: "Venice",
       date: "28/09/17",
