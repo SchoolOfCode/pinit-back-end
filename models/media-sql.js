@@ -3,7 +3,8 @@ import db from "../db/connection.js";
 
 //Getting all media items by its user
 export async function getAllUserMedia() {
-   return dummyData;
+   const result = await db.query(`SELECT * FROM media;`);
+   return result.rows;
 }
 
 //Getting a media item by its ID
@@ -40,10 +41,20 @@ export async function getMediaByDate(date) {
 }
 
 // Adding new media item to the data array
-export async function addMedia(item) {
-   dummyData.push(item);
-   console.log(dummyData[dummyData.length - 1]);
-   return dummyData[dummyData.length - 1];
+// export async function addMedia(item) {
+//    dummyData.push(item);
+//    console.log(dummyData[dummyData.length - 1]);
+//    return dummyData[dummyData.length - 1];
+// }
+
+export async function addMedia(
+   { aws_key, media_title, media_descr, date, location } // FIXME: will be a separate table later on
+) {
+   const result = await db.query(
+      `INSERT INTO media (aws_key, media_title, media_descr, date, location) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+      [aws_key, media_title, media_descr, date, location]
+   );
+   return result.rows[result.length - 1]; // ? is this gonna work
 }
 
 //Editing a media item
@@ -111,22 +122,3 @@ export async function deleteMediaByDate(date) {
 
    return deletedMedia;
 }
-
-// export async function getAllMedia() {
-//    const result = await db.query(`SELECT * FROM media;`);
-//    return result.rows;
-// }
-
-// export async function addMedia(
-//    aws_key,
-//    media_title,
-//    media_desc,
-//    date,
-//    location
-// ) {
-//    const result = await db.query(
-//       `INSERT INTO media (aws_key, media_title, media_desc, date, location) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-//       [aws_key, media_title, media_desc, date, location]
-//    );
-//    return result.rows[0];
-// }

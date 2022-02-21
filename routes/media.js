@@ -70,6 +70,7 @@ router.get("/media/location/:location", async function (req, res) {
 // GET media by date
 router.get("/media/date/:date", async function (req, res) {
    const date = Number(req.params.date);
+
    const data = await getMediaByDate(date);
    if (data) {
       return res.json({
@@ -88,6 +89,12 @@ router.get("/media/date/:date", async function (req, res) {
 //POST media
 router.post("/media", async function (req, res) {
    const data = req.body;
+   // const aws_key = req.body.aws_key
+   //    media_title,
+   //    media_desc,
+   //    date,
+   //    location // FIXME: will be a separate table later on
+
    console.log("this is the data", data);
    const result = await addMedia(data);
    if (!result) {
