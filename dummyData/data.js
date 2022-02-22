@@ -45,7 +45,7 @@ const dummyData = [
       id: 5,
       userId: 11,
       aws_key:
-         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS3kSQmPmUhLBciXIktOzw8JKwRmioYL8OQg&usqp=CAU",
+         "https://www.fodors.com/wp-content/uploads/2019/11/HERO_Venice__FloatingCityBuilt_iStock-986940360.jpg",
       media_title: "Fifth stop in Italy",
       location: "Venice",
       date: 28092017,
