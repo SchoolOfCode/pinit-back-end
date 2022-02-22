@@ -41,7 +41,9 @@ export async function getMediaByDate(date) {
 
 // Adding new media item to the data array
 export async function addMedia(item) {
-   dummyData.push(item);
+   let id = dummyData.length + 1;
+   dummyData.push({ id, ...item });
+
    console.log(dummyData[dummyData.length - 1]);
    return dummyData[dummyData.length - 1];
 }
