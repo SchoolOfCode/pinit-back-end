@@ -10,12 +10,8 @@ export async function getAllUserMedia() {
 //Getting a media item by its ID
 export async function getMediaById(id) {
    //finds first media item with an id that matches the parameter
-   const media = dummyData.find((item) => {
-      if (item.id === id) {
-         return item;
-      }
-   });
-   return media;
+   const result = await db.query(`SELECT * FROM media WHERE id = $1;`, [id]);
+   return result.rows;
 }
 
 //Getting a media item by its location
@@ -32,20 +28,11 @@ export async function getMediaByLocation(location) {
 
 //Getting a media item by its date
 export async function getMediaByDate(date) {
-   const userData = dummyData.filter((item) => {
-      if (item.date === date) {
-         return item;
-      }
-   });
-   return userData;
+   const result = await db.query(`SELECT * FROM media WHERE date = $1;`, [
+      date,
+   ]);
+   return result.rows;
 }
-
-// Adding new media item to the data array
-// export async function addMedia(item) {
-//    dummyData.push(item);
-//    console.log(dummyData[dummyData.length - 1]);
-//    return dummyData[dummyData.length - 1];
-// }
 
 export async function addMedia(
    { aws_key, media_title, media_descr, date, location } // FIXME: will be a separate table later on
