@@ -54,7 +54,7 @@ export async function addMedia(
       `INSERT INTO media (aws_key, media_title, media_descr, date, location) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
       [aws_key, media_title, media_descr, date, location]
    );
-   return result.rows[result.length - 1]; // ? is this gonna work
+   return result.rows[result.rows.length - 1];
 }
 
 //Editing a media item
