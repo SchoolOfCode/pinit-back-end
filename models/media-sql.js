@@ -1,5 +1,4 @@
 import db from "../db/connection.js";
-// import dummyData from "../dummyData/data.js";
 
 //Getting all media items by its user
 export async function getAllUserMedia() {
@@ -14,7 +13,54 @@ export async function getMediaById(id) {
    return result.rows;
 }
 
-//Getting a media item by its location
+//Getting a media item by its date
+export async function getMediaByDate(date) {
+   const result = await db.query(`SELECT * FROM media WHERE date = $1;`, [
+      date,
+   ]);
+   return result.rows;
+}
+
+//Adding media
+export async function addMedia(
+   { aws_key, media_title, media_descr, date, location } // TODO: will be a separate table later on
+) {
+   const result = await db.query(
+      `INSERT INTO media (aws_key, media_title, media_descr, date, location) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [aws_key, media_title, media_descr, date, location]
+   );
+   //return result.rows[result.rows.length - 1]; //TODO: check if this only returns one row or all
+   return result;
+}
+
+//Editing a media item
+export async function editMediaByID(
+   id,
+   { aws_key, media_title, media_descr, date, location }
+) {
+   const result = await db.query(
+      `UPDATE media SET aws_key = $2, media_title = $3 , media_descr = $4, date =$5, location = $6 WHERE id = $1 RETURNING *;`,
+      [id, aws_key, media_title, media_descr, date, location]
+   );
+   return result;
+}
+
+//Deleting a media item by id
+export async function deleteMediaById(id) {
+   const result = await db.query(`DELETE FROM media WHERE id = $1 RETURNING *`, [id])
+   return result;
+}
+
+//Deleting a media item by date
+export async function deleteMediaByDate(date) {
+   const result = await db.query(`DELETE FROM media WHERE date = $1 RETURNING *`, [date])
+   return result;
+   
+}
+
+/******************** LOCATION SECTION NEEDS FIXING **********************/
+//TODO: check location stuff
+//Getting a media item by its location 
 export async function getMediaByLocation(location) {
    //Find all media with the same location as the parameter
    //Puts the found media into an array and returns
@@ -26,44 +72,9 @@ export async function getMediaByLocation(location) {
    return userData;
 }
 
-//Getting a media item by its date
-export async function getMediaByDate(date) {
-   const result = await db.query(`SELECT * FROM media WHERE date = $1;`, [
-      date,
-   ]);
-   return result.rows;
-}
 
-export async function addMedia(
-   { aws_key, media_title, media_descr, date, location } // FIXME: will be a separate table later on
-) {
-   const result = await db.query(
-      `INSERT INTO media (aws_key, media_title, media_descr, date, location) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-      [aws_key, media_title, media_descr, date, location]
-   );
-   return result.rows[result.rows.length - 1];
-}
-
-//Editing a media item
-export async function editMediaByID(id, updates) {
-   const foundIndex = dummyData.findIndex((item) => {
-      return item.id === id;
-   });
-   dummyData[foundIndex] = updates;
-   return dummyData[foundIndex];
-}
-
-//Deleting a media item by id
-export async function deleteMediaById(id) {
-   const foundIndex = dummyData.findIndex((item) => {
-      return item.id === id;
-   });
-   const itemToDelete = dummyData[foundIndex];
-   dummyData.splice(foundIndex, 1);
-   return itemToDelete;
-}
-
-//Deleting a media item by location
+//TODO: check location stuff 
+//Deleting a media item by location 
 export async function deleteMediaByLocation(location) {
    //Map creating an arrayof indexes to delete
    const foundIndex = dummyData
@@ -83,27 +94,6 @@ export async function deleteMediaByLocation(location) {
    for (let i = foundIndex.length - 1; i >= 0; i--) {
       deletedMedia.push(dummyData[i]);
       //deletedMedia array is returned to show the user what has been deleted
-      dummyData.splice(foundIndex[i], 1);
-   }
-
-   return deletedMedia;
-}
-
-//Deleting a media item by date
-export async function deleteMediaByDate(date) {
-   const foundIndex = dummyData
-      .map((item, index) => {
-         if (item.date !== date) {
-            //pass
-         } else {
-            return index;
-         }
-      })
-      .filter((item) => item);
-
-   const deletedMedia = [];
-   for (let i = foundIndex.length - 1; i >= 0; i--) {
-      deletedMedia.push(dummyData[i]);
       dummyData.splice(foundIndex[i], 1);
    }
 
