@@ -10,11 +10,11 @@ import {
    deleteMediaById,
    deleteMediaByLocation,
    deleteMediaByDate,
-} from "../models/media.js";
+} from "../models/media-sql.js";
 
 const router = express.Router();
 
-// GET all media
+//! GET all media
 router.get("/media", async function (req, res) {
    const data = await getAllUserMedia();
    if (data) {
@@ -31,7 +31,7 @@ router.get("/media", async function (req, res) {
    }
 });
 
-// GET media by id
+//! GET media by id
 router.get("/media/:id", async function (req, res) {
    const id = Number(req.params.id);
    const data = await getMediaById(id);
@@ -49,7 +49,7 @@ router.get("/media/:id", async function (req, res) {
    }
 });
 
-// GET media by location
+//! GET media by location
 router.get("/media/location/:location", async function (req, res) {
    const location = req.params.location;
    const data = await getMediaByLocation(location);
@@ -67,9 +67,10 @@ router.get("/media/location/:location", async function (req, res) {
    }
 });
 
-// GET media by date
+//! GET media by date
 router.get("/media/date/:date", async function (req, res) {
    const date = Number(req.params.date);
+
    const data = await getMediaByDate(date);
    if (data) {
       return res.json({
@@ -85,11 +86,11 @@ router.get("/media/date/:date", async function (req, res) {
    }
 });
 
-//POST media
+//!POST media
 router.post("/media", async function (req, res) {
    const data = req.body;
-   console.log("this is the data", data);
    const result = await addMedia(data);
+
    if (!result) {
       res.json({
          success: false,
@@ -103,7 +104,7 @@ router.post("/media", async function (req, res) {
    });
 });
 
-//DELETE media by id
+//! DELETE media by id
 router.delete("/media/:id", async function (req, res) {
    const id = Number(req.params.id);
    const result = await deleteMediaById(id);
@@ -121,7 +122,7 @@ router.delete("/media/:id", async function (req, res) {
    }
 });
 
-//DELETE all media by location
+//! DELETE all media by location
 router.delete("/media/location/:location", async function (req, res) {
    const location = req.params.location;
    const result = await deleteMediaByLocation(location);
@@ -138,7 +139,8 @@ router.delete("/media/location/:location", async function (req, res) {
       });
    }
 });
-//DELETE all media by date
+
+//! DELETE all media by date
 router.delete("/media/date/:date", async function (req, res) {
    const date = Number(req.params.date);
    const result = await deleteMediaByDate(date);
@@ -155,7 +157,8 @@ router.delete("/media/date/:date", async function (req, res) {
       });
    }
 });
-//PUT media by id
+
+//!PUT media by id
 router.put("/media/:id", async function (req, res) {
    const id = Number(req.params.id);
    const update = req.body;
