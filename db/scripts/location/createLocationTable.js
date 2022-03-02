@@ -1,6 +1,6 @@
-import db from "../../connection,js";
+import db from "../../connection.js";
 const response = await db.query(
-    `CREATE TABLE IF NOT EXISTS location (loc_id SERIAL PRIMARY KEY, media_id, country, city, postcode, street, latitude, longitude) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`
+    `CREATE TABLE IF NOT EXISTS location (loc_id SERIAL PRIMARY KEY, media_id INT, country INT, city TEXT , postcode TEXT, street TEXT, latitude INT, longitude INT);`
 )
 console.log(response);
 db.end();
