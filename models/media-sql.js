@@ -1,6 +1,6 @@
 import db from "../db/connection.js";
 
-//Getting all media items by its user
+//Getting all media items
 export async function getAllUserMedia() {
    const result = await db.query(`SELECT * FROM media;`);
    return result.rows;
@@ -47,29 +47,30 @@ export async function editMediaByID(
 
 //Deleting a media item by id
 export async function deleteMediaById(id) {
-   const result = await db.query(`DELETE FROM media WHERE id = $1 RETURNING *`, [id])
+   const result = await db.query(`DELETE FROM media WHERE id = $1 RETURNING *;`, [id])
    return result;
 }
 
 //Deleting a media item by date
 export async function deleteMediaByDate(date) {
-   const result = await db.query(`DELETE FROM media WHERE date = $1 RETURNING *`, [date])
+   const result = await db.query(`DELETE FROM media WHERE date = $1 RETURNING *;`, [date])
    return result;
    
 }
 
 /******************** LOCATION SECTION NEEDS FIXING **********************/
-//TODO: check location stuff
-//Getting a media item by its location 
-export async function getMediaByLocation(location) {
+
+//Getting a media item by its lat lon from location table
+// where media_id in location === id in media table  
+
+
+
+
+export async function getMediaByLocation(id, lat, lon) {
    //Find all media with the same location as the parameter
    //Puts the found media into an array and returns
-   const userData = dummyData.filter((item) => {
-      if (item.location === location) {
-         return item;
-      }
-   });
-   return userData;
+
+   const result = await db.query('SELECT * FROM media WHERE ')
 }
 
 
