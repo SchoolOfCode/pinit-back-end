@@ -1,7 +1,7 @@
 import express from "express";
 
 import {
-   getAllUserMedia,
+   getAllMedia,
    getMediaById,
    getMediaByLocation,
    getMediaByDate,
@@ -16,7 +16,7 @@ const router = express.Router();
 
 //! GET all media
 router.get("/media", async function (req, res) {
-   const data = await getAllUserMedia();
+   const data = await getAllMedia();
    if (data) {
       return res.json({
          success: true,
@@ -51,8 +51,8 @@ router.get("/media/:id", async function (req, res) {
 
 //! GET media by location
 router.get("/media/location/:location", async function (req, res) {
-   const location = req.params.location;
-   const data = await getMediaByLocation(location);
+   const location = req.params.id&media_id;
+   const data = await getMediaByLocation(id, media_id);
    if (data) {
       return res.json({
          success: true,
@@ -92,16 +92,17 @@ router.post("/media", async function (req, res) {
    const result = await addMedia(data);
 
    if (!result) {
-      res.json({
+   return res.json({
          success: false,
          message: "something broke, we couldn't post the media.",
       });
-   }
-   res.json({
+   } else {
+   return res.json({
       success: true,
       message: "Image posted to the app",
       payload: result,
    });
+}
 });
 
 //! DELETE media by id
@@ -109,12 +110,12 @@ router.delete("/media/:id", async function (req, res) {
    const id = Number(req.params.id);
    const result = await deleteMediaById(id);
    if (!result) {
-      res.json({
+      return res.json({
          success: false,
          message: `something broke, we couldn't find ${id}`,
       });
    } else {
-      res.json({
+      return res.json({
          success: true,
          message: `Deleted media with the id ${id}`,
          payload: result,
@@ -124,15 +125,15 @@ router.delete("/media/:id", async function (req, res) {
 
 //! DELETE all media by location
 router.delete("/media/location/:location", async function (req, res) {
-   const location = req.params.location;
-   const result = await deleteMediaByLocation(location);
+   const location = req.params.id&media_id;
+   const result = await deleteMediaByLocation(id, media_id);
    if (!result) {
-      res.json({
+      return res.json({
          success: false,
          message: `something went brokey wokey, we couldn't find ${location}`,
       });
    } else {
-      res.json({
+      return res.json({
          success: true,
          message: `Deleted all media at the location ${location}`,
          payload: result,
@@ -145,12 +146,12 @@ router.delete("/media/date/:date", async function (req, res) {
    const date = Number(req.params.date);
    const result = await deleteMediaByDate(date);
    if (!result) {
-      res.json({
+      return res.json({
          success: false,
          message: `something broke, we couldn't find ${date}`,
       });
    } else {
-      res.json({
+      return res.json({
          success: true,
          message: `Deleted all media on the date ${date}`,
          payload: result,
@@ -164,13 +165,12 @@ router.put("/media/:id", async function (req, res) {
    const update = req.body;
    const result = await editMediaByID(id, update);
    if (!result) {
-      res,
-         json({
+      return res.json({
             success: false,
             message: "something went oops, sorry",
          });
    } else {
-      res.json({
+      return res.json({
          success: true,
          message: "image post updated",
          payload: result,

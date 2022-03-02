@@ -24,7 +24,7 @@ export async function getLocationByLatLon(latitude, longitude) {
     return result.rows;
 }
 
-// Add location
+// POST location
 export async function addLocData({media_id, country, city, postcode, street, latitude, longitude}) {
     const result = await db.query( `INSERT INTO location (media_id, country, city, postcode, street, latitude, longitude) VALUES ($1, $2, $3, $4, $5, $6, $7);`,
     [
@@ -40,7 +40,7 @@ export async function addLocData({media_id, country, city, postcode, street, lat
 }
 
 // Edit location
-export async function editLocData(loc_id, {media_id, country, city, postcode, street, latitude, longitude}) {
+export async function updateLocData(loc_id, {media_id, country, city, postcode, street, latitude, longitude}) {
     const result = await db.query(`UPDATE location SET media_id = $2, country = $3, city = $4, postcode = $5, street = $6, latitude = $7, longitude = $8 WHERE loc_id = $1 RETURNING *;`, [loc_id, media_id, country, city, postcode, street, latitude, longitude])
     return result;
 }
