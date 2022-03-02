@@ -42,17 +42,17 @@ export async function addLocData({media_id, country, city, postcode, street, lat
 // Edit location
 export async function editLocData(loc_id, {media_id, country, city, postcode, street, latitude, longitude}) {
     const result = await db.query(`UPDATE location SET media_id = $2, country = $3, city = $4, postcode = $5, street = $6, latitude = $7, longitude = $8 WHERE loc_id = $1 RETURNING *;`, [loc_id, media_id, country, city, postcode, street, latitude, longitude])
-    return result
+    return result;
 }
 
 // Delete location by loc_id
 export async function deleteLocByLocID(loc_id) {
-    const result = await db.query('DELETE FROM location WHERE loc_id = $1 RETURNING *;', [loc_id])
-    return result 
+    const result = await db.query(`DELETE FROM location WHERE loc_id = $1 RETURNING *;`, [loc_id])
+    return result; 
 }
 
 // Delete location by lat lon
 export async function deleteLocByLatLon(latitude, longitude) {
-    const result = await db.query('DELETE FROM location WHERE latitude = $1 AND longitude = $2 RETURNING *;', [latitude, longitude])
-    return result 
+    const result = await db.query(`DELETE FROM location WHERE latitude = $1 AND longitude = $2 RETURNING *;`, [latitude, longitude])
+    return result;
 }

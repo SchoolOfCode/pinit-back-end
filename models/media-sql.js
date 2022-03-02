@@ -58,45 +58,15 @@ export async function deleteMediaByDate(date) {
    
 }
 
-/******************** LOCATION SECTION NEEDS FIXING **********************/
-
-//Getting a media item by its lat lon from location table
-// where media_id in location === id in media table  
-
-
-
-
-export async function getMediaByLocation(id, lat, lon) {
-   //Find all media with the same location as the parameter
-   //Puts the found media into an array and returns
-
-   const result = await db.query('SELECT * FROM media WHERE ')
+// Get media by location
+//! NOT SURE IF WORKS
+export async function getMediaByLocation(id, media_id) {
+   const result = await db.query(`SELECT * FROM media INNER JOIN location ON media.id = location.media_id RETURNING * WHERE $1 = $2;`, [id, media_id] )
+   return result;
 }
 
-
-//TODO: check location stuff 
 //Deleting a media item by location 
-export async function deleteMediaByLocation(location) {
-   //Map creating an arrayof indexes to delete
-   const foundIndex = dummyData
-      .map((item, index) => {
-         if (item.location !== location) {
-            //pass
-         } else {
-            return index;
-         }
-      })
-      .filter((item) => item);
-   //Filter used to remove undefined items from the array (from map function)
-
-   //For loop uses recorded indexes from previous
-   //step to delete items from the data array
-   const deletedMedia = [];
-   for (let i = foundIndex.length - 1; i >= 0; i--) {
-      deletedMedia.push(dummyData[i]);
-      //deletedMedia array is returned to show the user what has been deleted
-      dummyData.splice(foundIndex[i], 1);
-   }
-
-   return deletedMedia;
+export async function deleteMediaByLocation(id, media_id) {
+   const result = await db.query(`DELETE FROM media INNER JOIN location ON media.id = location.media_id WHERE $1 = $2;`, [id, media_id])
+   return result;
 }
