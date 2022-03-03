@@ -6,10 +6,12 @@
    "scripts": {
       "start": "node ./bin/www.js",
       "db:deploy": "node ./db/scripts/users/createTable.js && node ./db/scripts/users/populateTable.js",
-      "db:createusers": "node -r dotenv/config ./db/scripts/users/createTable.js",
+      "db:createusers": "node -r dotenv/config ./db/scripts/users/createUsersTable.js",
       "db:createmedia": "node -r dotenv/config ./db/scripts/media/createMediaTable.js",
-      "db:populateusers": "node -r dotenv/config ./db/scripts/users/populateTable.js",
+      "db:populateusers": "node -r dotenv/config ./db/scripts/users/populateUsersTable.js",
       "db:populatemedia": "node -r dotenv/config ./db/scripts/media/populateMedia.js",
+      "db:createlocation": "node -r dotenv/config ./db/scripts/location/createLocationTable.js",
+      "db:populatelocation": "node -r dotenv/config ./db/scripts/location/populateLocationTable.js",
       "dev": "nodemon -r dotenv/config ./bin/www.js",
       "mediamodel": "node ./models/media.js",
       "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
