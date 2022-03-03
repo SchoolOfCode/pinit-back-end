@@ -1,17 +1,48 @@
-// import express from "express";
-// import { getAllUsers, addUser } from "../models/users.js";
+import express from "express";
+import { getDataByEmail, getAllUsers } from "../models/users-sql.js";
 
-// const router = express.Router();
+const router = express.Router();
 
-// /* GET users listing. */
-// router.get("/users", async function (req, res, next) {
-//   const users = await getAllUsers();
+// GET all users
+router.get("/users", async function (req, res) {
+    const data = await getAllUsers();
+    if (data) {
+       return res.json({
+          success: true,
+          message: "Fetched all users",
+          payload: data,
+       });
+    } else {
+       return res.json({
+          success: false,
+          message: "something went wrong",
+       });
+    }
+ });
 
-//   res.json({
-//     success: true,
-//     payload: users,
-//   });
-// });
+
+
+/* GET users listing by email, create USER if not there */
+router.get("/users/:email", async function (req, res) {
+    console.log('in email function')
+    const email = req.params;
+    console.log(email)
+    const data = await getDataByEmail(email);
+    if(data){
+    res.json({
+    success: true,
+    payload: data,
+    });
+    } else { return res.json({
+    success: false,
+    message: "Barry isn't here"
+})}
+});
+
+
+
+
+
 
 // /* PUT user */
 // router.post("/users", async function (req, res) {
