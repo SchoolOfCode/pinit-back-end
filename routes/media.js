@@ -123,9 +123,11 @@ router.delete("/media/:id", async function (req, res) {
    }
 });
 
-//! DELETE all media by location
-router.delete("/media/location/:location", async function (req, res) {
-   const location = req.params.id&media_id;
+//! DELETE single media
+router.delete("/media/:mediaid", async function (req, res) {
+   const latlon = req.query.params;
+   const lat = req.params.lat;
+   const lon = req.params.lon;
    const result = await deleteMediaByLocation(id, media_id);
    if (!result) {
       return res.json({
