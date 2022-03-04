@@ -1,10 +1,15 @@
 import express from 'express'
 
-import { getDataByEmail, getAllUsers } from '../models/users-sql.js'
+import {
+  getDataByEmail,
+  getAllUsers,
+  addUser,
+  deleteUser
+} from '../models/users-sql.js'
 
 const router = express.Router()
 
-// GET all users
+//! GET all users
 router.get('/users', async function (req, res) {
   const data = await getAllUsers()
   if (data) {
@@ -21,16 +26,15 @@ router.get('/users', async function (req, res) {
   }
 })
 
-/* GET users listing by email, create USER if not there */
+//! GET users data by email
 router.get('/users/:email', async function (req, res) {
-  console.log('in email function')
-  const email = req.params
-  console.log(email)
-  const data = await getDataByEmail(email)
-  if (data) {
+  const email = req.params.email
+  const result = await getDataByEmail(email)
+  if (result) {
     res.json({
       success: true,
-      payload: data
+      message: 'Barry is here',
+      payload: result
     })
   } else {
     return res.json({
@@ -40,14 +44,39 @@ router.get('/users/:email', async function (req, res) {
   }
 })
 
-// /* PUT user */
-// router.post("/users", async function (req, res) {
-//   const { username, first_name, last_name, email } = req.body;
-//   const user = await addUser(username, first_name, last_name, email);
-//   res.json({
-//     success: true,
-//     payload: user,
-//   });
-// });
+//! POST user
+router.post('/users', async function (req, res) {
+  const { username, email } = req.body
+  const user = await addUser(username, email)
+  if (user) {
+    res.json({
+      success: true,
+      payload: user
+    })
+  } else {
+    return res.json({
+      success: false,
+      message: `Something broke, we couldn't post the new user ${username}`
+    })
+  }
+})
 
-// export default router;
+//! DELETE user by user_id
+router.delete('/users/:user_id', async function (req, res) {
+  const user_id = req.params.user_id
+  const result = await deleteUser(user_id)
+  if (result) {
+    res.json({
+      success: true,
+      message: `User ${user_id}`,
+      payload: result
+    })
+  } else {
+    return res.json({
+      success: false,
+      message: `Something broke, we couldn't delete user ${user_id}`
+    })
+  }
+})
+
+export default router

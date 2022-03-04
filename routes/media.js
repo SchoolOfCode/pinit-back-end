@@ -4,12 +4,8 @@ import {
   getAllMedia,
   getMediaById,
   getMediaByLocation,
-  getMediaByDate,
   addMedia,
-  editMediaByID,
-  deleteMediaById,
-  deleteMediaByLocation,
-  deleteMediaByDate
+  deleteMediaById
 } from '../models/media-sql.js'
 
 const router = express.Router()
@@ -50,32 +46,13 @@ router.get('/media/:id', async function (req, res) {
 })
 
 //! GET media by location
-router.get('/media/location/:location', async function (req, res) {
-  const location = req.params.id & media_id
-  const data = await getMediaByLocation(id, media_id)
+router.get('/media/:place', async function (req, res) {
+  const place = req.params.place
+  const data = await getMediaByLocation(place)
   if (data) {
     return res.json({
       success: true,
       message: `Media fetched from the location ${location}`,
-      payload: data
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: 'something went wrong'
-    })
-  }
-})
-
-//! GET media by date
-router.get('/media/date/:date', async function (req, res) {
-  const date = Number(req.params.date)
-
-  const data = await getMediaByDate(date)
-  if (data) {
-    return res.json({
-      success: true,
-      message: `Media fetched with the date ${date}`,
       payload: data
     })
   } else {
@@ -106,76 +83,19 @@ router.post('/media', async function (req, res) {
 })
 
 //! DELETE media by id
-router.delete('/media/:id', async function (req, res) {
-  const id = Number(req.params.id)
-  const result = await deleteMediaById(id)
-  if (!result) {
+router.delete('/media/:media_id', async function (req, res) {
+  const media_id = Number(req.params.media_id)
+  const result = await deleteMediaById(media_id)
+  if (result) {
     return res.json({
-      success: false,
-      message: `something broke, we couldn't find ${id}`
+      success: true,
+      message: `Deleted media with the id ${media_id}`,
+      payload: result
     })
   } else {
     return res.json({
-      success: true,
-      message: `Deleted media with the id ${id}`,
-      payload: result
-    })
-  }
-})
-
-//! DELETE single media
-router.delete('/media/:mediaid', async function (req, res) {
-  const latlon = req.query.params
-  const lat = req.params.lat
-  const lon = req.params.lon
-  const result = await deleteMediaByLocation(id, media_id)
-  if (!result) {
-    return res.json({
       success: false,
-      message: `something went brokey wokey, we couldn't find ${location}`
-    })
-  } else {
-    return res.json({
-      success: true,
-      message: `Deleted all media at the location ${location}`,
-      payload: result
-    })
-  }
-})
-
-//! DELETE all media by date
-router.delete('/media/date/:date', async function (req, res) {
-  const date = Number(req.params.date)
-  const result = await deleteMediaByDate(date)
-  if (!result) {
-    return res.json({
-      success: false,
-      message: `something broke, we couldn't find ${date}`
-    })
-  } else {
-    return res.json({
-      success: true,
-      message: `Deleted all media on the date ${date}`,
-      payload: result
-    })
-  }
-})
-
-//!PUT media by id
-router.put('/media/:id', async function (req, res) {
-  const id = Number(req.params.id)
-  const update = req.body
-  const result = await editMediaByID(id, update)
-  if (!result) {
-    return res.json({
-      success: false,
-      message: 'something went oops, sorry'
-    })
-  } else {
-    return res.json({
-      success: true,
-      message: 'image post updated',
-      payload: result
+      message: `something broke, we couldn't find ${media_id}`
     })
   }
 })
@@ -201,3 +121,78 @@ export default router
 //     payload: media,
 //   });
 // });
+
+// //! DELETE single media
+// router.delete('/media/:mediaid', async function (req, res) {
+//   const latlon = req.query.params
+//   const lat = req.params.lat
+//   const lon = req.params.lon
+//   const result = await deleteMediaByLocation(id, media_id)
+//   if (!result) {
+//     return res.json({
+//       success: false,
+//       message: `something went brokey wokey, we couldn't find ${location}`
+//     })
+//   } else {
+//     return res.json({
+//       success: true,
+//       message: `Deleted all media at the location ${location}`,
+//       payload: result
+//     })
+//   }
+// })
+
+// //! DELETE all media by date
+// router.delete('/media/date/:date', async function (req, res) {
+//   const date = Number(req.params.date)
+//   const result = await deleteMediaByDate(date)
+//   if (!result) {
+//     return res.json({
+//       success: false,
+//       message: `something broke, we couldn't find ${date}`
+//     })
+//   } else {
+//     return res.json({
+//       success: true,
+//       message: `Deleted all media on the date ${date}`,
+//       payload: result
+//     })
+//   }
+// })
+
+// //!PUT media by id
+// router.put('/media/:id', async function (req, res) {
+//   const id = Number(req.params.id)
+//   const update = req.body
+//   const result = await editMediaByID(id, update)
+//   if (!result) {
+//     return res.json({
+//       success: false,
+//       message: 'something went oops, sorry'
+//     })
+//   } else {
+//     return res.json({
+//       success: true,
+//       message: 'image post updated',
+//       payload: result
+//     })
+//   }
+// })
+// //! GET media by date
+// router.get('/media/date/:date', async function (req, res) {
+//   const date = Number(req.params.date)
+
+//   const data = await getMediaByDate(date)
+//   if (data) {
+//     return res.json({
+//       success: true,
+//       message: `Media fetched with the date ${date}`,
+//       payload: data
+//     })
+//   } else {
+//     return res.json({
+//       success: false,
+//       message: 'something went wrong'
+//     })
+//   }
+// })
