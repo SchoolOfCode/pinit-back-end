@@ -1,32 +1,39 @@
 {
-   "name": "testing-project-week",
-   "version": "0.0.0",
-   "private": true,
-   "type": "module",
-   "scripts": {
-      "start": "node ./bin/www.js",
-      "db:deploy": "node ./db/scripts/users/createTable.js && node ./db/scripts/users/populateTable.js",
-      "db:createusers": "node -r dotenv/config ./db/scripts/users/createTable.js",
-      "db:createmedia": "node -r dotenv/config ./db/scripts/media/createMediaTable.js",
-      "db:populateusers": "node -r dotenv/config ./db/scripts/users/populateTable.js",
-      "db:populatemedia": "node -r dotenv/config ./db/scripts/media/populateMedia.js",
-      "dev": "nodemon -r dotenv/config ./bin/www.js",
-      "mediamodel": "node ./models/media.js",
-      "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
-   },
-   "dependencies": {
-      "cookie-parser": "~1.4.4",
-      "cors": "^2.8.5",
-      "debug": "~2.6.9",
-      "dropbox": "^10.24.0",
-      "express": "~4.16.1",
-      "morgan": "~1.9.1",
-      "pg": "^8.7.1"
-   },
-   "devDependencies": {
-      "dotenv": "^10.0.0",
-      "jest": "^27.4.5",
-      "nodemon": "^2.0.15",
-      "supertest": "^6.1.6"
-   }
+  "name": "testing-project-week",
+  "prettier": "prettier-config-standard",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ./bin/www.js",
+    "db:deploy": "node ./db/scripts/users/createTable.js && node ./db/scripts/users/populateTable.js",
+    "db:createusers": "node -r dotenv/config ./db/scripts/users/createUsersTable.js",
+    "db:createmedia": "node -r dotenv/config ./db/scripts/media/createMediaTable.js",
+    "db:populateusers": "node -r dotenv/config ./db/scripts/users/populateUsersTable.js",
+    "db:populatemedia": "node -r dotenv/config ./db/scripts/media/populateMedia.js",
+    "db:createlocation": "node -r dotenv/config ./db/scripts/location/createLocationTable.js",
+    "db:populatelocation": "node -r dotenv/config ./db/scripts/location/populateLocationTable.js",
+    "dev": "nodemon -r dotenv/config ./bin/www.js",
+    "mediamodel": "node ./models/media.js",
+    "db:createMaster": "node -r dotenv/config ./db/scripts/master/createAllTables.js",
+    "db:populateMaster": "node -r dotenv/config ./db/scripts/master/populateAllTables.js",
+    "db:dropAllTables": "node -r dotenv/config ./db/scripts/master/dropAllTables.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dropbox": "^10.24.0",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15",
+    "prettier-config-standard": "^5.0.0",
+    "supertest": "^6.1.6"
+  }
 }
