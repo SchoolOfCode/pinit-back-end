@@ -22,10 +22,10 @@ export async function getMediaById(media_id) {
 // }
 
 //! POST media
-export async function addMedia({ loc_id, img_url, title, notes }) {
+export async function addMedia({ loc_id, img_url, title, place, notes }) {
   const result = await db.query(
-    `INSERT INTO media (loc_id, img_url, title, notes) VALUES ($1, $2, $3, $4) RETURNING *`,
-    [loc_id, img_url, title, notes]
+    `INSERT INTO media (loc_id, img_url, title, place, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+    [loc_id, img_url, title, place, notes]
   )
   //return result.rows[result.rows.length - 1]; //TODO: check if this only returns one row or all
   return result

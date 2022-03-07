@@ -9,8 +9,8 @@ export async function getAllLocationData() {
 //! POST location
 export async function addLocData({ user_id, place, lat, lng }) {
   const result = await db.query(
-    `INSERT INTO place(user_id, place, lat, lng) VALUES ($1, $2, $3, $4);`,
-    [user_id, place, lat, lng]
+    `INSERT INTO place(user_id, lat, lng) VALUES ($1, $2, $3);`,
+    [user_id, lat, lng]
   )
   return result.rows
 }
