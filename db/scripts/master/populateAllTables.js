@@ -2,27 +2,26 @@ import db from '../../connection.js'
 
 const response = await db.query(`INSERT INTO users(username, email)
 VALUES ('barryshitpeas', 'barry.shitpeas@hotmail.com'),
-       ('dannyleafblower', 'danny.leafblower@haol.com'),
+       ('dannyleafblower', 'danny.leafblower@aol.com'),
        ('mistymoo', 'misty.moo@woofwoof.com');
 
-INSERT INTO location(user_id, location, lat, lng)
-VALUES (1, 'Germany', 52.520, 13.405),
-       (1, 'Germany', 51.053, 13.737),
-       (2, 'Leafton', 51.507, 0.127),
-       (3, 'Back Garden', 53.481, 2.242),
-       (4, 'The Park', 51.752, 1.257);
+
+INSERT INTO place(user_id, place, lat, lng)
+VALUES (1, 'London', 51.545585399817966, -0.5494009347372437),
+       (1, 'London', 51.396331784441024, -0.037297327028535915),
+       (2, 'Leafton', 51.646968059980836, -0.3559174363750419),
+       (3, 'Back Garden', 51.47273644130273, 0.14002693637736469),
+       (4, 'The Park', 53.33586381370047, -2.3462119895986087);
 
 INSERT INTO media(loc_id, img_url, title, notes)
-VALUES (1, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fexcitedcats.com%2Fcan-cats-see-tv%2F&psig=AOvVaw0vkAPrVWB6pcJA-kIMIKtX&ust=1646487373176000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKiHlM_JrPYCFQAAAAAdAAAAABAD', 'Barrys Telly', 'A pic of Barrys Telly'),
-       (1, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.deutschland.de%2Fen%2Ftopic%2Flife%2Fmore-tourists-in-germany-than-ever-in-2018&psig=AOvVaw1ZOz_tJEHm_8HGSIRujgLX&ust=1646487419143000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJD-pOfJrPYCFQAAAAAdAAAAABAD', 'Barry in Germany', 'Big barry'),
-       (2, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-photo%2Ffunny-dog-jack-russell-terrier-sitting-leaves-park-fall-day-animal-sweater-street-square-autumn-mood-dog-parson-terrier-plays-maple-red-yellow-leaves_20737220.htm&psig=AOvVaw1XBsNcOTqdQl8ceGZ7LoDL&ust=1646487478527000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMDFw_3JrPYCFQAAAAAdAAAAABAe', 'Blowing leaves', 'In the park'),
-       (3, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.bbc.co.uk%2Fnews%2Fbusiness-56362987&psig=AOvVaw2svA0dIcF47qsdH3PpJ0Gw&ust=1646487982632000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMC-iu_LrPYCFQAAAAAdAAAAABAK', 'Staring at cats', 'Through the fence'),
-       (4, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fdog-sniffing-bush&psig=AOvVaw2CxfDSRWisyasgw37V_vGv&ust=1646487912904000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIjp3czLrPYCFQAAAAAdAAAAABAD', 'Sniffed a bush', 'Good Bush'),
-       (4, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.theguardian.com%2Flifeandstyle%2F2021%2Fmay%2F15%2Fhe-grabbed-the-lead-and-said-give-me-the-dog-can-pet-detectives-stop-the-rise-in-animal-theft&psig=AOvVaw1vICSjLB4JmiRFfmgsUWJQ&ust=1646487708501000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCLhOrKrPYCFQAAAAAdAAAAABAE', 'Sniffed another bush', 'Another really good bush');`);
+VALUES (1, 'https://media.timeout.com/images/105186767/750/422/image.jpg', 'Barrys Telly', 'A pic of Barrys Telly'),
+       (1, 'https://media.timeout.com/images/105237777/image.jpg', 'Barry in Germany', 'Big barry'),
+       (2, 'https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg', 'Blowing leaves', 'In the park'),
+       (3, 'https://www.thetrainline.com/cms/media/1701/torre_pisa_pisa_tower.jpg?mode=crop&width=1080&height=1080&quality=70', 'Staring at cats', 'Through the fence'),
+       (4, 'https://media.timeout.com/images/105489544/image.jpg', 'Sniffed a bush', 'Good Bush'),
+       (4, 'https://www.fodors.com/wp-content/uploads/2019/11/HERO_Venice__FloatingCityBuilt_iStock-986940360.jpg', 'Sniffed another bush', 'Another really good bush');`)
 
-       console.log(response);
+
+console.log(response)
 
        db.end();
-
-
-       

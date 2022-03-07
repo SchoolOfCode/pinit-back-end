@@ -6,10 +6,10 @@ const mediaResponse = await db.query(`CREATE TABLE IF NOT EXISTS users (
   , email     TEXT
   );
   
-  CREATE TABLE IF NOT EXISTS location (
+  CREATE TABLE IF NOT EXISTS place (
     loc_id    SERIAL PRIMARY KEY
   , user_id   INT
-  , location  TEXT
+  , place     TEXT
   , lat       DECIMAL
   , lng       DECIMAL
   );
@@ -19,9 +19,9 @@ const mediaResponse = await db.query(`CREATE TABLE IF NOT EXISTS users (
   , loc_id    INT
   , img_url   TEXT
   , title     TEXT      
-  , notes     TEXt
+  , notes     TEXT
   );`)
 
-  console.log(mediaResponse);
+console.log(mediaResponse)
 
-  db.end();
+db.end()
