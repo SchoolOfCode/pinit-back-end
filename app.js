@@ -23,7 +23,7 @@ app.use('/', usersRouter, mediaRouter, locationRouter)
 
 app.use(function (req, res, next) {
   res.status(404).json({
-    message: "We couldn't find what you were looking for 😞"
+    message: "We couldn't find what you were looking for 🔥🔥🔥"
   })
 })
 
