@@ -7,7 +7,7 @@ export async function getAllLocationData() {
 }
 
 //! GET user, location, media by loc_id
-export async function getAllByLocationID(loc_id, user_id) {
+export async function getAllByLocationID(user_id, loc_id) {
   const result = await db.query(
     `SELECT 
 users.user_id,
@@ -15,15 +15,35 @@ place.user_id,
 place.loc_id,
 media.loc_id,
 media_id,
-img_url
+img_url,
+place.lat,
+place.lng
 FROM
 place
 INNER JOIN
 users ON users.user_id = place.user_id
 INNER JOIN
-media ON media.loc_id = $1
-WHERE place.user_id = $2
-AND $1 = media.loc_id;`, [loc_id, user_id]
+media ON media.loc_id = $2
+WHERE place.user_id = $1
+AND $2 = media.loc_id;`, [user_id, loc_id]
+  )
+  return result.rows
+}
+
+//! GET user, location, media by loc_id
+export async function getAllLocationByUserID(user_id) {
+  const result = await db.query(
+    `SELECT 
+users.user_id,
+place.user_id,
+place.loc_id,
+place.lat,
+place.lng
+FROM
+place
+INNER JOIN
+users ON users.user_id = place.user_id
+WHERE place.user_id = $1;`, [user_id]
   )
   return result.rows
 }

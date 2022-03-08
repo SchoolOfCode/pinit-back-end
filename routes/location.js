@@ -6,7 +6,8 @@ import {
   getAllLocationData,
   addLocData,
   deleteLocByLocID,
-  getAllByLocationID
+  getAllByLocationID,
+  getAllLocationByUserID
 } from '../models/location-sql.js'
 
 const router = express.Router()
@@ -29,15 +30,34 @@ router.get('/location', async function (req, res) {
 })
 
 //! GET user, location, media by loc_id
-router.get('/location/:loc_id/:user_id', async function (req, res) {
+router.get('/location/:user_id/:loc_id', async function (req, res) {
   const loc_id = Number(req.params.loc_id)
   const user_id = Number(req.params.user_id)
 
-  const data = await getAllByLocationID(loc_id, user_id)
+  const data = await getAllByLocationID(user_id, loc_id)
   if (data) {
     return res.json({
       success: true,
       message: 'Fetched all location data by loc_id',
+      payload: data
+    })
+  } else {
+    return res.json({
+      success: false,
+      message: 'something went wrong'
+    })
+  }
+})
+
+//! GET location by user_id
+router.get('/location/:user_id', async function (req, res) {
+  const user_id = Number(req.params.user_id)
+
+  const data = await getAllLocationByUserID(user_id)
+  if (data) {
+    return res.json({
+      success: true,
+      message: 'Fetched all location data by user_id',
       payload: data
     })
   } else {
