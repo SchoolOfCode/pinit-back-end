@@ -5,7 +5,8 @@ import {
   getMediaById,
   getMediaByLocation,
   addMedia,
-  deleteMediaById
+  deleteMediaById,
+  getMediaByLocId
 } from '../models/media-sql.js'
 
 const router = express.Router()
@@ -35,6 +36,24 @@ router.get('/media/:id', async function (req, res) {
     return res.json({
       success: true,
       message: `Fetched media with the id ${media_id}`,
+      payload: data
+    })
+  } else {
+    return res.json({
+      success: false,
+      message: 'something went wrong'
+    })
+  }
+})
+
+//!GET Media by location ID
+router.get('/media/location/:loc_id', async function (req, res) {
+  const loc_id = Number(req.params.loc_id)
+  const data = await getMediaByLocId(loc_id)
+  if (data) {
+    return res.json({
+      success: true,
+      message: `Fetched media with the loc id: ${loc_id}`,
       payload: data
     })
   } else {
