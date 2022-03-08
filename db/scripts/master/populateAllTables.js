@@ -5,6 +5,8 @@ VALUES ('barryshitpeas', 'barry.shitpeas@hotmail.com'),
        ('dannyleafblower', 'danny.leafblower@aol.com'),
        ('mistymoo', 'misty.moo@woofwoof.com');
 
+
+
 INSERT INTO place(user_id, lat, lng)
 VALUES (1, 51.545585399817966, -0.5494009347372437),
        (1, 51.396331784441024, -0.037297327028535915),
@@ -20,6 +22,7 @@ VALUES (1, 'https://media.timeout.com/images/105186767/750/422/image.jpg', 'Barr
        (4, 'https://media.timeout.com/images/105489544/image.jpg', 'Sniffed a bush', 'The Park', 'Good Bush'),
        (4, 'https://www.fodors.com/wp-content/uploads/2019/11/HERO_Venice__FloatingCityBuilt_iStock-986940360.jpg', 'Sniffed another bush', 'Hullard Park', 'Another really good bush');`)
 
+
 console.log(response)
 
-db.end()
+       db.end();
