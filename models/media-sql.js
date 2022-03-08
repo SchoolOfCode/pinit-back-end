@@ -15,6 +15,14 @@ export async function getMediaById(media_id) {
   return result.rows
 }
 
+//GET Media by Location ID
+export async function getMediaByLocId(loc_id) {
+  //finds first media item with an id that matches the parameter
+  const result = await db.query(`SELECT * FROM media WHERE loc_id = $1;`, [
+    id
+  ])
+  return result.rows
+}
 // //GET a media item by its date
 // export async function getMediaByDate(date) {
 //   const result = await db.query(`SELECT * FROM media WHERE date = $1;`, [date])
