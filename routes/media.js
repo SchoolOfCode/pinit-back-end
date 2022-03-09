@@ -73,13 +73,14 @@ router.post('/media', async function (req, res) {
       success: false,
       message: "something broke, we couldn't post the media."
     })
-  } else {
-    return res.json({
-      success: true,
-      message: 'Image posted to the app',
-      payload: result
-    })
-  }
+  } 
+  
+ return res.json({
+    success: true,
+    message: 'Image posted to the app',
+    payload: result
+  })
+
 })
 
 //! DELETE media by id
