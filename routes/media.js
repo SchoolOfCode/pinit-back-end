@@ -2,7 +2,7 @@ import express from 'express'
 
 import {
   getAllMedia,
-  getMediaById,
+  getMediaById,  // rename to getMediaByLocId
   getMediaByLocation,
   addMedia,
   deleteMediaById
@@ -10,97 +10,124 @@ import {
 
 const router = express.Router()
 
-//! GET all media
-router.get('/media', async function (req, res) {
-  const data = await getAllMedia()
-  if (data) {
-    return res.json({
-      success: true,
-      message: 'Fetched all media',
-      payload: data
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: 'something went wrong'
-    })
-  }
-})
-
-//! GET media by loc_id
+//* GET media by loc_id
 router.get('/media/:loc_id', async function (req, res) {
-  const media_id = Number(req.params.loc_id)
-  const data = await getMediaById(media_id)
-  if (data) {
-    return res.json({
-      success: true,
-      message: `Fetched media with the id ${media_id}`,
-      payload: data
-    })
-  } else {
+  const loc_id = Number(req.params)
+  const result = await getMediaById(loc_id)
+
+
+  if (!result) {
     return res.json({
       success: false,
       message: 'something went wrong'
     })
   }
+
+  return res.json({
+    success: true,
+    message: `Fetched media with the loc_id ${loc_id}`,
+    payload: result
+  })
 })
 
-//! GET media by location
-router.get('/media/:place', async function (req, res) {
-  const place = req.params.place
-  const data = await getMediaByLocation(place)
-  if (data) {
-    return res.json({
-      success: true,
-      message: `Media fetched from the location ${location}`,
-      payload: data
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: 'something went wrong'
-    })
-  }
-})
-
-//!POST media
 router.post('/media', async function (req, res) {
   const data = req.body
-  const result = await addMedia(data)
+
+  const loc_id = await addLocData(data)
+  const result = await addMedia(loc_id, data)
 
   if (!result) {
     return res.json({
       success: false,
       message: "something broke, we couldn't post the media."
     })
-  } else {
-    return res.json({
-      success: true,
-      message: 'Image posted to the app',
-      payload: result
-    })
   }
-})
 
-//! DELETE media by id
-router.delete('/media/:media_id', async function (req, res) {
-  const media_id = Number(req.params.media_id)
-  const result = await deleteMediaById(media_id)
-  if (result) {
-    return res.json({
-      success: true,
-      message: `Deleted media with the id ${media_id}`,
-      payload: result
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: `something broke, we couldn't find ${media_id}`
-    })
-  }
+  return res.json({
+    success: true,
+    message: 'Image posted to the app',
+    payload: result
+  })
 })
 
 export default router
+
+/* ___________________________ UNUSED ROUTES  - REMOVE__________________________________*/
+
+// //! GET all media
+// router.get('/media', async function (req, res) {
+//   const data = await getAllMedia()
+//   if (data) {
+//     return res.json({
+//       success: true,
+//       message: 'Fetched all media',
+//       payload: data
+//     })
+//   } else {
+//     return res.json({
+//       success: false,
+//       message: 'something went wrong'
+//     })
+//   }
+// })
+
+//! GET media by location
+// router.get('/media/:place', async function (req, res) {
+//   const place = req.params.place
+//   const data = await getMediaByLocation(place)
+//   if (data) {
+//     return res.json({
+//       success: true,
+//       message: `Media fetched from the location ${location}`,
+//       payload: data
+//     })
+//   } else {
+//     return res.json({
+//       success: false,
+//       message: 'something went wrong'
+//     })
+//   }
+// })
+
+//!POST media
+// router.post('/media', async function (req, res) {
+//   const data = req.body
+//   const result = await addMedia(data)
+
+//   if (!result) {
+//     return res.json({
+//       success: false,
+//       message: "something broke, we couldn't post the media."
+//     })
+//   }
+
+//  return res.json({
+//     success: true,
+//     message: 'Image posted to the app',
+//     payload: result
+//   })
+
+// })
+
+
+
+// //! DELETE media by id
+// router.delete('/media/:media_id', async function (req, res) {
+//   const media_id = Number(req.params.media_id)
+//   const result = await deleteMediaById(media_id)
+//   if (result) {
+//     return res.json({
+//       success: true,
+//       message: `Deleted media with the id ${media_id}`,
+//       payload: result
+//     })
+//   } else {
+//     return res.json({
+//       success: false,
+//       message: `something broke, we couldn't find ${media_id}`
+//     })
+//   }
+// })
 
 // /* GET media listing. */
 // router.get("/media", async function (req, res, next) {
