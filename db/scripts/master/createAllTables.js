@@ -3,7 +3,7 @@ import db from '../../connection.js'
 const mediaResponse = await db.query(`CREATE TABLE IF NOT EXISTS users (
     user_id   SERIAL PRIMARY KEY
   , username  TEXT
-  , user_email     TEXT
+  , email     TEXT
   );
   
   CREATE TABLE IF NOT EXISTS place (

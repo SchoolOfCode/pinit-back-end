@@ -1,17 +1,21 @@
 import db from '../db/connection.js'
 
+//* GET user_id by email
+export async function getUserID(email) {
+  console.log('this is the email', email)
+  const result = await db.query(`SELECT user_id FROM users WHERE email = $1;`, [
+    email
+  ])
+  //console.log('this is the get userID result', result)
+  return result.rows[0]
+}
+
 //* POST new user
 export async function addUser(username, email) {
   const result = await db.query(
     `INSERT INTO users(username, email)VALUES ($1, $2); RETURNING user_id`,
     [username, email]
   )
-  return result
-}
-
-//* GET user_id by email
-export async function getUserID(user_email) {
-  const result = await db.query(`SELECT user_id FROM users WHERE user_email = $1`, [user_email])
   return result
 }
 
@@ -36,7 +40,6 @@ export async function getUserID(user_email) {
 //   )
 //   return result.rows
 // }
-
 
 // // DELETE user by user_id
 // export async function deleteUser(user_id) {
