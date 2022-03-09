@@ -1,7 +1,5 @@
 import express from 'express'
 
-//! ROUTES WITH TWO SETS OF DATA TO PROCESS WILL PROBABLY BE INCORRECT, PLEASE CHECK
-
 import {
   getAllLocationData,
   addLocData,
@@ -12,98 +10,103 @@ import {
 
 const router = express.Router()
 
-//! GET all location data
-router.get('/location', async function (req, res) {
-  const data = await getAllLocationData()
-  if (data) {
-    return res.json({
-      success: true,
-      message: 'Fetched all location data',
-      payload: data
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: 'something went wrong'
-    })
-  }
-})
-
-//! GET user, location, media by loc_id
-router.get('/location/:user_id/:loc_id', async function (req, res) {
-  const loc_id = Number(req.params.loc_id)
-  const user_id = Number(req.params.user_id)
-
-  const data = await getAllByLocationID(user_id, loc_id)
-  if (data) {
-    return res.json({
-      success: true,
-      message: 'Fetched all location data by loc_id',
-      payload: data
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: 'something went wrong'
-    })
-  }
-})
-
-//! GET location by user_id
+//* GET location by user_id
 router.get('/location/:user_id', async function (req, res) {
   const user_id = Number(req.params.user_id)
 
-  const data = await getAllLocationByUserID(user_id)
-  if (data) {
-    return res.json({
-      success: true,
-      message: 'Fetched all location data by user_id',
-      payload: data
-    })
-  } else {
+  const result = await getAllLocationByUserID(user_id)
+  if (!result) {
     return res.json({
       success: false,
       message: 'something went wrong'
     })
   }
+  return res.json({
+    success: true,
+    message: 'Fetched all location data by user_id',
+    payload: result
+  })
 })
 
-//! POST location
-router.post('/location', async function (req, res) {
-  const data = req.body
-  const result = await addLocData(data)
-  if (result) {
-    return res.json({
-      success: true,
-      message: 'Location has been posted!',
-      payload: result
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: 'You went gone messed up.'
-    })
-  }
-})
+// //* POST location - NOT USING; WILL CALL ADDLOCDATA ON ADDING MEDIA
+// router.post('/location', async function (req, res) {
+//   const data = req.body
+//   const result = await addLocData(data)
 
-//! DELETE location by loc_id
-router.delete('/location/:loc_id', async function (req, res) {
-  const loc_id = Number(req.params.loc_id)
-  const result = await deleteLocByLocID(loc_id)
-  if (result) {
-    return res.json({
-      success: true,
-      message: `Place ${loc_id} has been deleted!`,
-      payload: result
-    })
-  } else {
-    return res.json({
-      success: false,
-      message: "You went gone messed up, but you didn't delete anything."
-    })
-  }
-})
+//   if (!result) {
+//     return res.json({
+//       success: false,
+//       message: 'You went gone messed up.'
+//     })
+//   }
+
+//   return res.json({
+//     success: true,
+//     message: 'Location has been posted!',
+//     payload: result
+//   })
+// })
+
 export default router
+
+/* ___________________________ UNUSED ROUTES  - REMOVE__________________________________*/
+
+//! ROUTES WITH TWO SETS OF DATA TO PROCESS WILL PROBABLY BE INCORRECT, PLEASE CHECK
+
+// //! GET all location data
+// router.get('/location', async function (req, res) {
+//   const data = await getAllLocationData()
+//   if (data) {
+//     return res.json({
+//       success: true,
+//       message: 'Fetched all location data',
+//       payload: data
+//     })
+//   } else {
+//     return res.json({
+//       success: false,
+//       message: 'something went wrong'
+//     })
+//   }
+// })
+
+// //! GET user, location, media by loc_id
+// router.get('/location/:user_id/:loc_id', async function (req, res) {
+//   const loc_id = Number(req.params.loc_id)
+//   const user_id = Number(req.params.user_id)
+
+//   const data = await getAllByLocationID(user_id, loc_id)
+//   if (data) {
+//     return res.json({
+//       success: true,
+//       message: 'Fetched all location data by loc_id',
+//       payload: data
+//     })
+//   } else {
+//     return res.json({
+//       success: false,
+//       message: 'something went wrong'
+//     })
+//   }
+// })
+
+// //! DELETE location by loc_id
+// router.delete('/location/:loc_id', async function (req, res) {
+//   const loc_id = Number(req.params.loc_id)
+//   const result = await deleteLocByLocID(loc_id)
+//   if (result) {
+//     return res.json({
+//       success: true,
+//       message: `Place ${loc_id} has been deleted!`,
+//       payload: result
+//     })
+//   } else {
+//     return res.json({
+//       success: false,
+//       message: "You went gone messed up, but you didn't delete anything."
+//     })
+//   }
+// })
 
 //! UPDATE Location
 // router.patch("/location/:loc_id&data", async function (req, res) {

@@ -48,7 +48,9 @@
 - Select everything
 
 ### 2. get all media for all loc_ids (of user) (for sidebar?)
+- return accordeon values (title & place ) - maybe
 
-- return accordeon values (title & place )
+### 3. post media
+- post media with loc_id (onSubmit)
 
-### 3. get all media
+

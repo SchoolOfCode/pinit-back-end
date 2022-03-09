@@ -1,22 +1,35 @@
 import db from '../db/connection.js'
 
-
-//! GET media by ID
-export async function getMediaById(media_id) {
-  //finds first media item with an id that matches the parameter
-  const result = await db.query(`SELECT * FROM media WHERE media_id = $1;`, [
-    media_id
-  ])
-  return result.rows
-}
-
-//Get media by loc_id
+//* GET media by loc_id
 export async function getMediaByLocId(loc_id) {
-  const result = await db.query(`SELECT * FROM media WHERE loc_id = $1;`, [loc_id])
-  return result;
+  const result = await db.query(`SELECT * FROM media WHERE loc_id = $1;`, [
+    loc_id
+  ])
+  return result
 }
 
 
+// do we need .rows ?
+
+//* POST media
+export async function addMedia(loc_id, { img_url, title, place, notes }) {
+  const result = await db.query(
+    `INSERT INTO media (loc_id, img_url, title, place, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+    [loc_id, img_url, title, place, notes]
+  )
+  return result
+}
+// do we need .rows ?
+
+//* GET media by media_id 
+//!ARE WE USING THIS?
+// export async function getMediaById(media_id) {
+//   //finds first media item with an id that matches the parameter
+//   const result = await db.query(`SELECT * FROM media WHERE media_id = $1;`, [
+//     media_id
+//   ])
+//   return result
+// }
 
 //___________________________________________________________________________________________
 

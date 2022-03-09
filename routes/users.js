@@ -35,18 +35,19 @@ router.get('/users/:user_email', async function (req, res) {
 
   if (!user_id) {
     return res.json({
-    success: false,
-    message: "Barry isn't here"
-  }) }
+      success: false,
+      message: "Barry isn't here"
+    })
+  }
 
   return res.json({
-      success: true,
-      message: 'Barry is here',
-      payload: user_id
-    })
+    success: true,
+    message: 'Barry is here',
+    payload: user_id
+  })
 })
 
-
+export default router
 
 /* ___________________________ UNUSED ROUTES  - REMOVE__________________________________*/
 // //! GET all users
@@ -84,8 +85,6 @@ router.get('/users/:user_email', async function (req, res) {
 //   }
 // })
 
-
-
 // //! DELETE user by user_id
 // router.delete('/users/:user_id', async function (req, res) {
 //   const user_id = req.params.user_id
@@ -103,5 +102,3 @@ router.get('/users/:user_email', async function (req, res) {
 //     })
 //   }
 // })
-
-export default router
