@@ -16,10 +16,10 @@ export async function addMedia(loc_id, { img_url, title, place, notes }) {
     [loc_id, img_url, title, place, notes]
   )
   return result
-
+}
 // do we need .rows ?
 
-//* GET media by media_id 
+//* GET media by media_id
 //!ARE WE USING THIS?
 // export async function getMediaById(media_id) {
 //   //finds first media item with an id that matches the parameter
