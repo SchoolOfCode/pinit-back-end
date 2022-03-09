@@ -1,20 +1,21 @@
 import express from 'express'
 
 import {
-  getAllMedia,
-  getMediaById,  // rename to getMediaByLocId
-  getMediaByLocation,
-  addMedia,
-  deleteMediaById
+  // getAllMedia,
+  getMediaByLocId, // rename to getMediaByLocId
+  // getMediaByLocation,
+  addMedia
+  // deleteMediaById
 } from '../models/media-sql.js'
+
+import { addLocData } from '../models/location-sql.js'
 
 const router = express.Router()
 
 //* GET media by loc_id
 router.get('/media/:loc_id', async function (req, res) {
   const loc_id = Number(req.params)
-  const result = await getMediaById(loc_id)
-
+  const result = await getMediaByLocId(loc_id)
 
   if (!result) {
     return res.json({
@@ -108,8 +109,6 @@ export default router
 //   })
 
 // })
-
-
 
 // //! DELETE media by id
 // router.delete('/media/:media_id', async function (req, res) {

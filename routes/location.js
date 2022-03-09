@@ -1,10 +1,10 @@
 import express from 'express'
 
 import {
-  getAllLocationData,
-  addLocData,
-  deleteLocByLocID,
-  getAllByLocationID,
+  // getAllLocationData,
+  // addLocData,
+  // deleteLocByLocID,
+  // getAllByLocationID,
   getAllLocationByUserID
 } from '../models/location-sql.js'
 

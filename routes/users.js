@@ -1,10 +1,10 @@
 import express from 'express'
 
 import {
-  getDataByEmail,
-  getAllUsers,
+  // getDataByEmail,
+  // getAllUsers,
   addUser,
-  deleteUser,
+  // deleteUser,
   getUserID
 } from '../models/users-sql.js'
 

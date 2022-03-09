@@ -1,0 +1,6 @@
+DB_HOST='ec2-54-228-9-90.eu-west-1.compute.amazonaws.com'
+DB_DATABASE='dcnpi4akd50fe5'
+DB_USER='rxiiubjlpezrbh'
+DB_PORT=5432
+DB_PASSWORD='ede64cd42534e90ebd544c31456f1e10517063ade5ee2a856cd9367d5faf9be9'
+DB_URI='postgres://rxiiubjlpezrbh:ede64cd42534e90ebd544c31456f1e10517063ade5ee2a856cd9367d5faf9be9@ec2-54-228-9-90.eu-west-1.compute.amazonaws.com:5432/dcnpi4akd50fe5'
