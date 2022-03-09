@@ -1,72 +1,68 @@
 import db from '../db/connection.js'
 
-//! GET all location data
-export async function getAllLocationData() {
-  const result = await db.query(`SELECT * FROM place;`)
-  return result.rows
-}
-
-//! GET user, location, media by loc_id
-export async function getAllByLocationID(user_id, loc_id) {
-  const result = await db.query(
-    `SELECT 
-users.user_id,
-place.user_id,
-place.loc_id,
-media.loc_id,
-media_id,
-img_url,
-place.lat,
-place.lng
-FROM
-place
-INNER JOIN
-users ON users.user_id = place.user_id
-INNER JOIN
-media ON media.loc_id = $2
-WHERE place.user_id = $1
-AND $2 = media.loc_id;`, [user_id, loc_id]
-  )
-  return result.rows
-}
-
-//! GET user, location, media by loc_id
+//! GET location by user_id
 export async function getAllLocationByUserID(user_id) {
   const result = await db.query(
-    `SELECT 
-users.user_id,
-place.user_id,
-place.loc_id,
-place.lat,
-place.lng
-FROM
-place
-INNER JOIN
-users ON users.user_id = place.user_id
-WHERE place.user_id = $1;`, [user_id]
+    `SELECT loc_id, lat, lng FROM place WHERE user_id = $1;`, [user_id]
   )
-  return result.rows
+  return result;
 }
+//do we need .rows in this?
 
 //! POST location
-export async function addLocData({ user_id, place, lat, lng }) {
+export async function addLocData({ user_id, lat, lng }) {
   const result = await db.query(
-    `INSERT INTO place(user_id, lat, lng) VALUES ($1, $2, $3);`,
+    `INSERT INTO place(user_id, lat, lng) VALUES ($1, $2, $3) RETURNING loc_id;`,
     [user_id, lat, lng]
   )
-  return result.rows
+  return result;
 }
+
+//______________________________________________________________________________
+
+// //! GET all location data
+// export async function getAllLocationData() {
+//   const result = await db.query(`SELECT * FROM place;`)
+//   return result.rows
+// }
+
+// //! GET user, location, media by user_id
+// export async function getAllLocationByUserID(user_id) {
+//   const result = await db.query(
+//     `SELECT 
+// users.user_id,
+// place.user_id,
+// place.loc_id,
+// place.lat,
+// place.lng
+// FROM
+// place
+// INNER JOIN
+// users ON users.user_id = place.user_id
+// WHERE place.user_id = $1;`, [user_id]
+//   )
+//   return result.rows
+// }
+
+// //! POST location
+// export async function addLocData({ user_id, place, lat, lng }) {
+//   const result = await db.query(
+//     `INSERT INTO place(user_id, lat, lng) VALUES ($1, $2, $3);`,
+//     [user_id, lat, lng]
+//   )
+//   return result.rows
+// }
 
 //TODO fix the table rename - to places instead of location - then come back and fic this SQL
 //! DELETE location and associated media by loc_id
-export async function deleteLocByLocID(loc_id) {
-  const result = await db.query(
-    `DELETE FROM place
-     WHERE place.loc_id = $1;`,
-    [loc_id]
-  )
-  return result
-}
+// export async function deleteLocByLocID(loc_id) {
+//   const result = await db.query(
+//     `DELETE FROM place
+//      WHERE place.loc_id = $1;`,
+//     [loc_id]
+//   )
+//   return result
+// }
 // // Edit location
 // export async function updateLocData(
 //   loc_id,

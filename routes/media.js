@@ -64,9 +64,29 @@ router.get('/media/:place', async function (req, res) {
 })
 
 //!POST media
+// router.post('/media', async function (req, res) {
+//   const data = req.body
+//   const result = await addMedia(data)
+
+//   if (!result) {
+//     return res.json({
+//       success: false,
+//       message: "something broke, we couldn't post the media."
+//     })
+//   } 
+  
+//  return res.json({
+//     success: true,
+//     message: 'Image posted to the app',
+//     payload: result
+//   })
+
+// })
+
 router.post('/media', async function (req, res) {
+  const loc_id = await addLocData()
   const data = req.body
-  const result = await addMedia(data)
+  const result = await addMedia(loc_id, data)
 
   if (!result) {
     return res.json({
