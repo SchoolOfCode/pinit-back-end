@@ -51,7 +51,7 @@ WHERE place.user_id = $1;`, [user_id]
 //! POST location
 export async function addLocData({ user_id, place, lat, lng }) {
   const result = await db.query(
-    `INSERT INTO place(user_id, lat, lng) VALUES ($1, $2, $3);`,
+    `INSERT INTO place(user_id, lat, lng) VALUES ($1, $2, $3) RETURNING loc_id;`,
     [user_id, lat, lng]
   )
   return result.rows

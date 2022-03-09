@@ -6,11 +6,11 @@ export async function getAllMedia() {
   return result.rows
 }
 
-//! GET media by ID
-export async function getMediaById(media_id) {
+//! GET media by LOC_ID
+export async function getMediaById(loc_id) {
   //finds first media item with an id that matches the parameter
-  const result = await db.query(`SELECT * FROM media WHERE media_id = $1;`, [
-    id
+  const result = await db.query(`SELECT * FROM media WHERE loc_id = $1;`, [
+    loc_id
   ])
   return result.rows
 }
