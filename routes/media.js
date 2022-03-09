@@ -2,7 +2,7 @@ import express from 'express'
 
 import {
   getAllMedia,
-  getMediaById,
+  getMediaById,  // rename to getMediaByLocId
   getMediaByLocation,
   addMedia,
   deleteMediaById
@@ -15,6 +15,7 @@ router.get('/media/:loc_id', async function (req, res) {
   const loc_id = Number(req.params)
   const result = await getMediaById(loc_id)
 
+
   if (!result) {
     return res.json({
       success: false,
@@ -24,7 +25,7 @@ router.get('/media/:loc_id', async function (req, res) {
 
   return res.json({
     success: true,
-    message: `Fetched media with the id ${media_id}`,
+    message: `Fetched media with the loc_id ${loc_id}`,
     payload: result
   })
 })

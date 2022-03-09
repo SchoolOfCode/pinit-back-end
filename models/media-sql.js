@@ -7,8 +7,6 @@ export async function getMediaByLocId(loc_id) {
   ])
   return result
 }
-
-
 // do we need .rows ?
 
 //* POST media
@@ -18,7 +16,7 @@ export async function addMedia(loc_id, { img_url, title, place, notes }) {
     [loc_id, img_url, title, place, notes]
   )
   return result
-}
+
 // do we need .rows ?
 
 //* GET media by media_id 
