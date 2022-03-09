@@ -27,9 +27,9 @@ router.get('/media', async function (req, res) {
   }
 })
 
-//! GET media by id
-router.get('/media/:id', async function (req, res) {
-  const media_id = Number(req.params)
+//! GET media by loc_id
+router.get('/media/:loc_id', async function (req, res) {
+  const media_id = Number(req.params.loc_id)
   const data = await getMediaById(media_id)
   if (data) {
     return res.json({
