@@ -1,7 +1,8 @@
 //import { database, host, port } from "pg/lib/defaults.js";
 
 // this environment variable gets handed to us by heroku if we use the postgres add-on
-export const connectionString = process.env.DB_URI
+
+export const connectionString = process.env.DB_URI;
 
 const db = {
   host: process.env.DB_HOST,
